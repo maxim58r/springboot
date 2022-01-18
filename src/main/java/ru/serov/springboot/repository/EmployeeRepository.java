@@ -2,6 +2,7 @@ package ru.serov.springboot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.serov.springboot.entity.Employee;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long>, EmployeeCustomRepository, QuerydslPredicateExecutor<Employee> {
     Optional<Employee> findByFirstNameContainingIgnoreCase(String firstName);
 
     List<Employee> findByFirstNameContainingIgnoreCaseAndSalary(String firstName, Integer salary);
